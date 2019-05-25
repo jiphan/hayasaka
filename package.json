@@ -1,0 +1,16 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "discord.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jiphan",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.0",
+    "git": "^0.1.5",
+    "googleapis": "^39.2.0"
+  }
+}
