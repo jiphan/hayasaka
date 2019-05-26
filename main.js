@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-const token = 'NTgxMzU5NTM4MzA5OTU1NTk1.XOeUAA.1Y8fGWlTivA5u0bD4wj6PifKPPg';
+const token = 'NTgyMDAwMzI2NzY5Mzc3Mjg1.XOn47A.ueC4ZZQchb7SBX9gdd_GP8a1i7Q';
 const PREFIX = '!';
 
 const {google} = require('googleapis');
@@ -24,10 +24,10 @@ client.authorize(function(err, tokens){
 async function gsrun(cl, song){
     const gsapi = google.sheets({version:'v4', auth: cl })
     const update = {
-        spreadsheetId: '1V1TXuBip74BkEXaP20XDW7-uxa7B8xrRZpyhLMRlH8A',
-        range: 'Notes!A1',
+        spreadsheetId: '11OLzmcRk5G8H49RQi1gCkuPyZavndyDBAQSwne4Zz5Y',
+        range: 'Data!A1',
         valueInputOption: 'USER_ENTERED',
-        resource: { values: [ [song] ], }
+        resource: { values: [ [song], '<-- bot post' ], }
     };
     let res = await gsapi.spreadsheets.values.append(update);
     console.log('OK!');
