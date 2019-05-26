@@ -1,10 +1,7 @@
 const Discord = require('discord.js');
-const bot = new Discord.Client();
-const token = 'NTgyMDAwMzI2NzY5Mzc3Mjg1.XOn47A.ueC4ZZQchb7SBX9gdd_GP8a1i7Q';
-const PREFIX = '!';
-
 const {google} = require('googleapis');
 const keys = require('./keys.json');
+const bot = new Discord.Client();
 const client = new google.auth.JWT(
     keys.client_email, 
     null, 
@@ -13,33 +10,27 @@ const client = new google.auth.JWT(
 );
 
 client.authorize(function(err, tokens){
-    if(err){
-        console.log(err);
-        return;
-    } else{
-        console.log('Connected!');
-    }
+    console.log(err ? err : 'Connected!');
 });
 
-async function gsrun(cl, song){
-    const gsapi = google.sheets({version:'v4', auth: cl })
+async function gsappend(client, song){
+    const gsapi = google.sheets({version:'v4', auth: client })
     const update = {
-        spreadsheetId: '11OLzmcRk5G8H49RQi1gCkuPyZavndyDBAQSwne4Zz5Y',
-        range: 'Data!A1',
+        spreadsheetId: keys.spreadsheet_id,
+        range: keys.spreadsheet_dst,
         valueInputOption: 'USER_ENTERED',
-        resource: { values: [ [song], '<-- bot post' ], }
+        resource: { values: [ [song,'<-- bot post' ] ], }
     };
     let res = await gsapi.spreadsheets.values.append(update);
-    console.log('OK!');
+    console.log(res.config);
 }
 
-bot.login(token);
-bot.on('ready', () =>{
-    console.log('good morning!');
-})
+bot.login(keys.bot_token);
+bot.on('ready', () =>{ console.log('good morning!');})
 
 bot.on('message', msg=>{
-    let args = msg.content.substring(PREFIX.length).split(" ");
+    if(!msg.content.startsWith(keys.bot_prefix)) return;
+    let args = msg.content.substring(keys.bot_prefix.length).split(" ");
     switch(args[0]){
         case 'ping':
             msg.channel.send('pong!')
@@ -50,7 +41,7 @@ bot.on('message', msg=>{
         case 'add':
             var song = args.slice(1).join(' ');
             msg.reply('\"' + song + '\"...  got it!')
-            gsrun(client, song);
+            gsappend(client, song)
             break;
             // add_clean --> song.split('|') --> multiple cells?
         case 'help':
