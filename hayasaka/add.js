@@ -41,3 +41,23 @@ function what_div(args) {
     });
     return args.lastIndexOf(divi);
 }
+
+export async function gsmatch(gClient, spreadsheet_id, spreadsheet_dst) {
+    const gsapi = google.sheets({version:'v4', auth: gClient })
+    let result = await gsapi.spreadsheets.values.get({
+        spreadsheetId: spreadsheet_id,
+        range: spreadsheet_dst,
+        majorDimension: 'ROWS'
+    })
+    return result.data.values;
+}
+
+export function query(arr, row) {
+    let match = false
+    arr.forEach(a =>{
+        if(a[0] === row[0]) {
+            if(a[1] === row[1]) match = true;
+        }
+    });
+    if(match) return true;
+}
