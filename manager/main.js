@@ -29,19 +29,14 @@ async function checkout_remote_branch_for_bot_deploy(branch) {
 async function launch_bot_and_get_child_process(bot) {
     const bot_dir = path.join(BOT_DEPLOY_DIR, bot);
 
-    return checkout_remote_branch_for_bot_deploy('feature/master/bot_manager')  // TODO: update before merge into master
-        .then(() => {
-            fs.copyFileSync('./keys.json', path.join(bot_dir, 'keys.json'));  // TODO: this is stupid, just take the path in via command line and pass it on
-            return child_process.fork(path.join(bot_dir, 'main.js'));
-        });
+    return checkout_remote_branch_for_bot_deploy('master').then(() => {
+        fs.copyFileSync('./keys.json', path.join(bot_dir, 'keys.json'));  // TODO: this is stupid, just take the path in via command line and pass it on
+        return child_process.fork(path.join(bot_dir, 'main.js'));
+    });
 }
 
 let hayasaka_process = null;
-launch_bot_and_get_child_process('hayasaka').then(bot_process => {
-    hayasaka_process = bot_process;
-    console.log(bot_process);
-    console.log(hayasaka_process);
-});
+launch_bot_and_get_child_process('hayasaka').then(bot_process => hayasaka_process = bot_process);
 
 const manager_bot = new Discord.Client();
 manager_bot.login(TOKEN);
