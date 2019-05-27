@@ -34,7 +34,7 @@ async function launch_bot_and_get_child_process(bot) {
     const bot_dir = path.join(BOT_DEPLOY_DIR, bot);
 
     return checkout_remote_branch_for_bot_deploy('master').then(() => {
-        fs.copyFileSync('./keys.json', path.join(bot_dir, 'keys.json'));  // TODO: this is stupid, just take the path in via command line and pass it on
+        fs.copyFileSync('./keys.json', path.join(BOT_DEPLOY_DIR, 'keys.json'));  // TODO: this is stupid, just take the path in via command line and pass it on
         return child_process.fork(path.join(bot_dir, 'main.js'));
     });
 }
