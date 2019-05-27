@@ -1,6 +1,7 @@
 import * as add from './add.js';
 import { authSession } from './auth.js';
-import { bot_prefix, client_email, private_key, bot_token, spreadsheet_id, spreadsheet_dst } from './keys.json';
+import { client_email, private_key, bot_token } from './keys.json';
+import { bot_prefix, spreadsheet_id, spreadsheet_dst } from './conf.json';
 
 const session = new authSession(client_email, private_key, bot_token);
 session.authorize();

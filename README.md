@@ -20,7 +20,7 @@ For now, bots should be run from the root directory of the project (subject to c
 ### Hayasaka
 
 ```bash
-bash hayasaka/main.js
+npm start
 ```
 
 ### Manager
