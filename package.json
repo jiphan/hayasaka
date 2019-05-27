@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.5.0",
-    "git": "^0.1.5",
-    "googleapis": "^39.2.0"
+    "googleapis": "^39.2.0",
+    "nodegit": "^0.24.3",
+    "rimraf": "^2.6.3"
   }
 }
