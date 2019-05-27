@@ -17,6 +17,10 @@ async function checkout_remote_branch_for_bot_deploy(branch) {
         rimraf.sync(BOT_DEPLOY_DIR);  // rm -rf on bot deploy dir, no need to deal with repo syncing issues
     }
 
+    if (branch == 'master') {
+        return nodegit.Clone(REPO_PATH, BOT_DEPLOY_DIR);
+    }
+
     let repo = await nodegit.Clone(REPO_PATH, BOT_DEPLOY_DIR);
     // taken from https://github.com/nodegit/nodegit/blob/master/examples/checkout-remote-branch.js
     return repo.getHeadCommit()
