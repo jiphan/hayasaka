@@ -1,3 +1,4 @@
 /node_modules
 /bot_deploy_dir
 keys.json
+package-lock.json
