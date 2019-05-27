@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const {google} = require('googleapis');
-const keys = require('./keys.json');
+const keys = require('./keys');
+const lib = require('./lib');
 const bot = new Discord.Client();
 const client = new google.auth.JWT(
     keys.client_email, 
