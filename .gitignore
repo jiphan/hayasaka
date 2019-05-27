@@ -1,4 +1,4 @@
 /node_modules
 /bot_deploy_dir
 keys.json
-awskeypair.pem
+package-lock.json
