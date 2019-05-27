@@ -4,12 +4,14 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "hayasaka": "node -r esm hayasaka/main.js"
   },
   "author": "jiphan",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.5.0",
+    "esm": "^3.2.25",
     "googleapis": "^40.0.0",
     "nodegit": "^0.24.3",
     "rimraf": "^2.6.3"
