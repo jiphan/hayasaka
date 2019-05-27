@@ -7,7 +7,7 @@ Suite of discord bots.
 
 ## Installation
 
-Requires `node` and `npm`. To set up:
+Requires `node` (using v8.5.0 in production) and `npm`. To set up:
 
 ```bash
 npm install
@@ -26,7 +26,7 @@ npm start
 ### Manager
 
 ```bash
-node manager/main.js
+node -r esm manager/main.js
 ```
 
 Starting up Manager will start up Hayasaka as a subprocess.
