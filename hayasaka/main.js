@@ -48,7 +48,7 @@ bot.on('message', msg=>{
             gsappend(client, row)
             break;
         case 'help':
-            msg.reply('you can !ping, !sheet, and !add ~')
+            msg.reply('you can !ping, !sheet, and !add. More info on how to use !add coming soon ~')
             break;
     }
 })
