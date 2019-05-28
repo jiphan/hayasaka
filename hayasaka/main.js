@@ -50,7 +50,7 @@ session.dClient.on('message', msg=>{
 
 function append(msg, row, div) {
     msg.reply(`**${row[0]}** ${div} ${row[1]}`.trim() + '... got it!');
-    add.gsmatch(session.gClient, spreadsheet_id, spreadsheet_dst).then(function(arr) {
+    add.gslookup(session.gClient, spreadsheet_id, spreadsheet_dst).then(function(arr) {
         if(add.query(arr, row)) {
             msg.channel.send('hey I know that song!');
         } else {
