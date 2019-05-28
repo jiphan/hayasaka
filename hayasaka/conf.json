@@ -1,5 +1,11 @@
 {
+<<<<<<< HEAD
     "bot_prefix": ".",
     "spreadsheet_id": "11OLzmcRk5G8H49RQi1gCkuPyZavndyDBAQSwne4Zz5Y",
     "spreadsheet_dst": "Data!A:B"
+=======
+    "bot_prefix": "!",
+    "spreadsheet_id": "1V1TXuBip74BkEXaP20XDW7-uxa7B8xrRZpyhLMRlH8A",
+    "spreadsheet_dst": "Notes!A:B"
+>>>>>>> a10613a718c8ef1749d4680942fa7974a881906b
 }

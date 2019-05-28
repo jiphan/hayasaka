@@ -32,7 +32,7 @@ export function msg_parse(args) {
 }
 
 function what_div(args) {
-    let div = ['from', 'by', 'of', '|'];
+    let div = ['from', 'by', 'of', '|']
     let divi = ''
     args.forEach(a =>{
         div.forEach(d =>{
