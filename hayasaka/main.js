@@ -35,9 +35,6 @@ session.dClient.on('message', msg=>{
             msg.reply(`https://docs.google.com/spreadsheets/d/${spreadsheet_id}`);
             break;
         case 'test':
-            yt.get_title(args).then(function(string) {
-                msg.reply(string);
-            });
             break;
         case 'thanks':
             msg.reply('happy to help!');
