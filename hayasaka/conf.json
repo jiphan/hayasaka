@@ -1,5 +1,5 @@
 {
-    "bot_prefix": ".",
-    "spreadsheet_id": "11OLzmcRk5G8H49RQi1gCkuPyZavndyDBAQSwne4Zz5Y",
-    "spreadsheet_dst": "Data!A:B"
+    "bot_prefix": "!",
+    "spreadsheet_id": "1V1TXuBip74BkEXaP20XDW7-uxa7B8xrRZpyhLMRlH8A",
+    "spreadsheet_dst": "Data!A:C"
 }
