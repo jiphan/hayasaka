@@ -37,6 +37,7 @@ session.dClient.on('message', msg=>{
         case 'test':
             break;
         case 'thanks':
+            msg.react('✌');
             msg.reply('happy to help!');
             break;
         case 'help':
