@@ -43,7 +43,7 @@ export function msg_parse(args) {
 function get_url(args) {
     let url = '';
     args.forEach(a =>{
-        if(a.search('youtube') != -1) {
+        if(a.search('youtu') != -1) {   // youtube and youtu.be
             url = args.splice(args.indexOf(a), 1)[0];
         }
     });
