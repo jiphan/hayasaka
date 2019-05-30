@@ -7,10 +7,11 @@ import { google } from 'googleapis';
  * @prop    {JWT}       gClient     Google JavaScript Web Token.
  */
 export class authSession {
-    constructor(client_email, private_key, bot_token) {
+    constructor(client_email, private_key, bot_token, api_key) {
         this.client_email = client_email;
         this.private_key = private_key;
         this.bot_token = bot_token;
+        this.yClient = api_key;
 
         this.dClient = new Client();
         this.gClient = new google.auth.JWT(
