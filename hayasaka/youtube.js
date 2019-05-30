@@ -1,5 +1,6 @@
 import { google } from 'googleapis';
 const ytdl = require('ytdl-core');
+const decode = require('unescape');
 
 export async function get_title(url) {
     let info = await ytdl.getInfo(url);
@@ -15,7 +16,7 @@ export async function get_results(yClient, search) {
     });
     let clean = [];
     result.data.items.forEach(async a=> {
-        clean.push([a.snippet.title, `http://youtu.be/${a.id.videoId}`]);
+        clean.push([decode(a.snippet.title), `http://youtu.be/${a.id.videoId}`]);
     });
     return clean;
 }
