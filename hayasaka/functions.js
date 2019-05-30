@@ -5,7 +5,7 @@
  * @param   {string}    args    Discord message to be parsed
  * @returns {string[]}          [title, separator, source, url]
  */
-export function msg_parse(args) {
+export function parse(args) {
     let title = '';                    
     let div = '';
     let source = ' ';                   // placeholder string for query()
