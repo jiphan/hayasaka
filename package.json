@@ -12,9 +12,11 @@
   "dependencies": {
     "discord.js": "^11.5.0",
     "esm": "^3.2.25",
+    "google-auth-library": "^4.2.2",
     "googleapis": "^40.0.0",
     "nodegit": "^0.24.3",
     "rimraf": "^2.6.3",
+    "unescape": "^1.0.1",
     "ytdl-core": "^0.29.2"
   }
 }

@@ -2,19 +2,18 @@ import * as gs from './gsheet.js';
 import * as yt from './youtube.js';
 import * as fn from './functions.js';
 import { authSession } from './auth.js';
-import { client_email, private_key, bot_token, api_key } from '../keys.json';
-import { bot_prefix, spreadsheet_id, spreadsheet_dst } from './conf.json';
+import * as key from '../keys.json';
+import * as conf from './conf.json';
 
-const session = new authSession(client_email, private_key, bot_token, api_key);
+const session = new authSession(key);
 session.authorize();
 
-session.dClient.on('ready', ()=> { 
-    console.log('good morning!');
-})
+session.dClient.on('ready', ()=> console.log('good morning!'));
+let recents = [];
 
 session.dClient.on('message', msg=> {
-    if(!msg.content.startsWith(bot_prefix)) return;
-    let args = msg.content.substring(bot_prefix.length).split(" ");
+    if(!msg.content.startsWith(conf.bot_prefix)) return;
+    let args = msg.content.substring(conf.bot_prefix.length).split(" ");
 
     switch(args[0]) {
         case 'add':
@@ -30,24 +29,46 @@ session.dClient.on('message', msg=> {
                 append(msg, row, div);
             }
             break;
+        case 'edit':
+            // sanitize input, permissions
+            if(args[1].search('!') == -1) {
+                msg.reply('which sheet?');
+                break;
+            }
+            gs.edit(session.gClient, conf.spreadsheet_id, args[1], args[2]);
+            msg.reply(`setting ${args[1]} to ${args[2]}!`)
+            break;
         case 'good':
             msg.channel.send(fn.good(args));
             break;
         case 'ping':
             msg.channel.send('pong!');
             break;
+        case 'playlist':
+            msg.reply(`https://www.youtube.com/playlist?list=${conf.playlist_id}`);
+            // yt.get_playlist(session.yClient, conf.playlist_id).then(results=> {
+            //     msg.channel.send(embed('[playlist]', results));
+            // });
+            break;
+        case 'queue':
+        case 'q':
+            // sanitize input
+            yt.add_video(session.yClient, conf.playlist_id, args[1], recents).then(items=> {
+                msg.channel.send(embed('[recently added]', items));
+            });
+            break;
         case 'rng':
-            msg.reply(`I pick... ${fn.rng(args[1])}!`);
             if(isNaN(args[1])) msg.react('🤔');
+            hype(msg, args[1])
             break;  
         case 'search': 
         case 's':
             yt.get_results(session.yClient, fn.parse(args)[0]).then(results=> {
-                msg.channel.send(embed(results));
+                msg.channel.send(embed('[search results]', results));
             });
             break;
         case 'sheet':
-            msg.reply(`https://docs.google.com/spreadsheets/d/${spreadsheet_id}`);
+            msg.reply(`https://docs.google.com/spreadsheets/d/${conf.spreadsheet_id}`);
             break;
         case 'thanks':
             msg.reply('happy to help!');
@@ -63,19 +84,37 @@ session.dClient.on('message', msg=> {
 
 function append(msg, row, div) {
     msg.reply(`**${row[0]}** ${div} ${row[1]}`.trim() + '... got it!');
-    gs.lookup(session.gClient, spreadsheet_id, spreadsheet_dst).then((arr)=> {
+    gs.lookup(session.gClient, conf.spreadsheet_id, conf.spreadsheet_dst).then((arr)=> {
         if(fn.query(arr, row)) {
             msg.channel.send('hey I know that song!');
         } else {
-            gs.append(session.gClient, row, spreadsheet_id, spreadsheet_dst);
+            gs.append(session.gClient, row, conf.spreadsheet_id, conf.spreadsheet_dst);
         }
     });
 }
 
-function embed(results) {
+function embed(title, results) {
     let fields = [];
     results.forEach(r=> {
         fields.push({name: r[0], value: r[1]})
     })
-    return {embed: {color: 0x0099ff, fields}}
+    return {embed: {color: 0x0099ff, title: title, fields}}
+}
+
+function hype(msg, max) {
+    msg.channel.send('I pick').then(m=> {
+        m.edit(`${m.content} .`).then(m=> {
+            setTimeout(() => {
+                m.edit(`${m.content} .`).then(m=> {
+                    setTimeout(() => {
+                        m.edit(`${m.content} .`).then(
+                            setTimeout(() => {
+                                m.edit(`${m.content} ${fn.rng(max)}!`)
+                            }, 1000)
+                        )
+                    }, 500);
+                })
+            }, 500);
+        })
+    })
 }
