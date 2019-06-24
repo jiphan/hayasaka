@@ -62,13 +62,14 @@ export function query(arr, row) {
 export function good(args) {
     switch(args[1]){
         case 'morning':
+            return 'coffee kudasai'
         case 'night':
+            return 'signing off~'
         default:
             return '???';
     }
 }
 
 export function rng(max) {
-    let rng = Math.ceil(Math.random() * max);
-    return rng;
+    return Math.ceil(Math.random() * max);
 }
