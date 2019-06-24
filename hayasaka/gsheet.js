@@ -34,3 +34,14 @@ export async function lookup(gClient, spreadsheet_id, spreadsheet_dst) {
     })
     return result.data.values;
 }
+
+export async function edit(gClient, spreadsheet_id, spreadsheet_dst, new_value) {
+    const gsapi = google.sheets({version:'v4', auth: gClient })
+    const update = {
+        spreadsheetId: spreadsheet_id,
+        range: spreadsheet_dst,
+        valueInputOption: 'USER_ENTERED',
+        resource: { values: [ [new_value] ] }
+    }
+    gsapi.spreadsheets.values.update(update)
+}
