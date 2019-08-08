@@ -11,8 +11,8 @@ export function parse(args) {
     let source = ' ';                   // placeholder string for query()
     let url = get_url(args);
     
-    let i = what_div(args);
-    if(i === -1) {
+    //let i = what_div(args);
+    if(1 || i === -1) {
         title = args.slice(1).join(' ');
     } else{
         title = args.slice(1, i).join(' ');
