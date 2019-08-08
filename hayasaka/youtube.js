@@ -1,10 +1,17 @@
 import { google } from 'googleapis';
+import { get } from 'http';
 const ytdl = require('ytdl-core');
 const decode = require('unescape');
 
 export async function get_title(url) {
+    // extract id from <url>
+    // search <yClient> for id
+    // there will be one (1) result
+    // return title from result json
+
     let info = await ytdl.getInfo(url);
-    return info.title;
+    console.log(info.title);
+    return info.player_response.videoDetails.title;
 }
 
 export async function get_results(yClient, search) {
